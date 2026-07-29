@@ -1,4 +1,5 @@
 module Main where
+import Language.Haskell.TH (varStrictType)
 
 main :: IO ()
 main = putStrLn "Starting program..."
@@ -37,6 +38,28 @@ isMember e (h:t)
 
 -- list comprehension
 -- [expression | element <- source, condition]
+
+qsort :: [Int] -> [Int]
+qsort [] = []
+qsort (h:t) = qsort [x | x <- t, x < h]
+              ++ [h] ++
+              qsort [x | x <- t, x>= h]
+
+-- partitionLT :: [Int] -> Int -> [Int]
+
+-- Polymorphism
+{- Strong and statis typed language.
+ - Strongly typed languages bind data types to vars.
+ - Has type-inference system. 
+ - If no type is defined, Haskell will not allow u do it.-}
+
+answer :: Int 
+answer        = 42
+
+add2 :: Float -> Float -> Float 
+add2 a b       = (a + b)
+
+-- add2 1 (fromIntegral answer)
 
 
 
