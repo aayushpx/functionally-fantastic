@@ -61,5 +61,27 @@ getInt = do
 -----------------------------------------------------------------------------
 --Lazy Evaluation
 
+fib :: Int -> Integer
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)
+
+-- ghci> select (5-3) (fib 11) (fib 1000)
+select::Integer -> Integer -> Integer -> Integer
+select n x y 
+        | n > 0     = x 
+        | otherwise = y
+
+
+-- ghci> f (2+3) (4-1) (3+9)
+f :: Integer -> Integer -> Integer -> Integer
+f m n p 
+        | m >= n && m >= p      = m 
+        | n >= m && n >= p      = n 
+        | otherwise             = p
+
+-- write func compare two lists and determine if they are equal
+-- TODO 
+
 
 
