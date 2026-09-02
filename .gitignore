@@ -1,0 +1,10 @@
+# Rust build artifacts
+target/
+
+# Rust Analyzer / IDE
+.rust-analyzer/
+
+# Local environment files
+.env
+.env.*
+!.env.example
