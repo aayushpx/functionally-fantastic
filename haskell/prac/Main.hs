@@ -1,3 +1,4 @@
+import Data.Char
 {-
 Write a function squares that takes a whole number and returns a list of all the perfect squares (a number which is the square of an integer) from 1 up to (and possibly including) the given number. You may write additional helper functions if you wish.
 example behaviour
@@ -5,7 +6,6 @@ example behaviour
 [1, 4, 9, 16, 25, 36, 49, 64, 81]
 -}
 
-import Data.Char
 
 -- with guards and recursion
 -- squares :: Int -> [Int]
@@ -104,16 +104,67 @@ mapNTimes f n lst       = mapNTimes f (n-1) (map f (lst))
 -- mapNTimes       = \f -> \n -> \xs -> map f xs 
 -- mapNTimes f n lst       = [f x | x <- lst]
 
+-- =====================================================================================================================================================================================================================
+-- harshad number: +ve int that is divisible by the sum of its digits 
+
+digits :: Int -> [Int]
+digits n
+  | n >= 1       = digits (n `div` 10) ++ [n `mod` 10]
+  | otherwise    = []
+
+harshad :: Int -> Bool 
+harshad n
+  | n `mod` (sum (digits n)) == 0       = True 
+  | otherwise                           = False
+
+-- harshad_numbers :: Int -> Int -> [Int]
+-- harshad_numbers a b 
+--   | harshad a && not (a > b)       = a : harshad_numbers (a+1) b
+--   | a > b                          = []
+--   | otherwise                      = harshad_numbers (a+1) b
+
+-- harshad_numbers :: Int -> Int -> [Int]
+-- harshad_numbers a b       = [x | x <- [a..b], harshad x, not (x > b)]
+
+harshad_numbers :: Int -> Int -> [Int]
+harshad_numbers a b       = filter (harshad) [a..b]
+
+third_last :: [a] -> a
+third_last (x:y:z:[])       = x
+third_last (x:xs)           = third_last xs
+
+sorted :: Ord a => [a] -> Bool 
+sorted []         = False
+sorted [x]        = True
+sorted (x:y:zs)
+  | x < y         = False
+  | x > y         = sorted (y:zs)
+  | otherwise     = True
 
 
+smallest_multiple :: Int -> Int 
+smallest_multiple n       = myHelper n 1
+
+myHelper :: Int -> Int -> Int 
+myHelper n i 
+  | [a | a <- [1..n], not (i `mod` a == 0)] == []       = i
+  | otherwise                                           = myHelper n (i+1)
 
 
+reformat :: String -> String 
+reformat []       = []
+reformat (x:xs)
+  | isUpper x       = toUpper x : upper xs 
+  | otherwise       = toLower x : lower xs 
 
+upper :: String -> String 
+upper []        = []
+upper (x:xs)
+  | x == ' '        = ' ' : reformat xs 
+  | otherwise       = toUpper x : upper xs 
 
-
-
-
-
-
-
-
+lower :: String -> String 
+lower []        = []
+lower (x:xs)
+  | x == ' '        = ' ' : reformat xs 
+  | otherwise       = toLower x : lower xs
