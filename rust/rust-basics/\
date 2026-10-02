@@ -1,0 +1,19 @@
+fn main() {
+    let numbers: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("Number array: {:?}", numbers);
+
+    let fruits: [&str; 3] = ["Apple", "Banana", "Orange"];
+    println!("Fruits Array: {}", fruits[0]);
+
+    let human = ("Alice", 30, false);
+    println!("Human Tuple: {:?}", human);
+
+    let my_mix_tuple = ("Kratos", 40, false, [1, 2, 3, 4, 5]);
+    println!("My Mix Tuple: {:?}", my_mix_tuple);
+
+    let number_slices: &[i32; 5]  = &[1, 2, 3, 4, 5];
+    println!("Number Slice: {:?}", number_slices);
+
+    let stone_cold:String = String::from("Hell, ");
+    println!("Stone Cold Says: {}", stone_cold);
+}
